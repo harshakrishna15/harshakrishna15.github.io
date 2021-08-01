@@ -2,8 +2,11 @@
 <html>
 
 <head>
-  <title>Python Projects</title>
+  <title>
+    Python Projects
+  </title>
 </head>
+
 <style>
   li {
     list-style-type: none;
@@ -14,18 +17,13 @@
   a {
     text-decoration: none;
     color: black;
-    /* padding: 2vw; */
-    font-family: monospace;
-    font-size: 30px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 25px;
     font-size-adjust: auto;
   }
 
-  a:hover {
-    background-color: #C6E9FF;
-  }
-
   nav {
-    width: 100vw;
+    width: 99.7vw;
     background-color: #D6EFFF;
   }
 
@@ -37,25 +35,73 @@
 
   body {
     margin: 0;
-    font-family: monospace;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+  }
+
+  .dropbtn {
+    background-color: #D6EFFF;
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 25px;
+    border: none;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #D6EFFF;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown:hover .dropbtn {
+    background-color: #D6EFFF;
   }
 </style>
 
-<!-- /* used for nav bar*/ -->
 <nav>
   <ul>
     <li>
       <a href="home.html" Home>Home</a>
     </li>
-    <li>
-      <a href="javaprj.html" Java Projects>Java Projects</a>
-    </li>
+    <div class="dropdown">
+      <button class="dropbtn">Programming Projects</button>
+      <div class="dropdown-content">
+        <a href="javaprj.html">Java Projects</a>
+        <a href="pythonprj.html">Python Projects</a>
+        <a href="flutter.html">Flutter Projects</a>
+      </div>
+    </div>
     <li>
       <a href="youtube_channel.html" Youtube Channel Page>Youtube Channel</a>
-    </li>
-    <li>
-      <a href="journal.html" Journals> Journals </a>
     </li>
   </ul>
 </nav>
@@ -68,10 +114,11 @@
 
 
 <center>
-<body>
-This is a place that will contain all my past and current Python Projects. This website will also contain
-screenshots and descriptions for each projects.
-</body>
+
+  <body>
+    This is a place that will contain all my past and current Python Projects. This website will also contain
+    screenshots and descriptions for each projects.
+  </body>
 </center>
 
 </html>

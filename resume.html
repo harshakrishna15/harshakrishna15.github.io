@@ -1,8 +1,12 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Harsha Krishnaswamy's Resume</title>
+    <title>
+        Home Page
+    </title>
 </head>
+
 <style>
     li {
         list-style-type: none;
@@ -13,13 +17,14 @@
     a {
         text-decoration: none;
         color: black;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 25px;
         font-size-adjust: auto;
+        font-weight: 600;
     }
 
     nav {
-        width: flex;
+        width: 99.7vw;
         background-color: #D6EFFF;
     }
 
@@ -31,8 +36,9 @@
 
     body {
         margin: 0;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 15px;
+        font-weight: 600;
         position: absolute;
         top: 0;
         right: 0;
@@ -44,8 +50,9 @@
     .dropbtn {
         background-color: #D6EFFF;
         color: black;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 25px;
+        font-weight: 600;
         border: none;
     }
 
@@ -82,5 +89,45 @@
         background-color: #D6EFFF;
     }
 </style>
+
+<nav>
+    <ul>
+        <li>
+            <a href="index.html" Home>Home</a>
+        </li>
+
+        <div class="dropdown">
+            <button class="dropbtn">Programming Projects</button>
+            <div class="dropdown-content">
+                <a href="javaprj.html">Java Projects</a>
+                <a href="pythonprj.html">Python Projects</a>
+            </div>
+        </div>
+
+        <li>
+            <a href="youtube_channel.html" Youtube Channel Page>Youtube Channel</a>
+        </li>
+        <li>
+            <a href="resume.html" Resume>Harsha Krishnaswamy's Resume</a>
+        </li>
+    </ul>
+</nav>
+
+<body style="background-color: white">
+
+    <center>
+        <h1>My Resume</h1>
+    </center>
+
+    <h2 style="margin-left: 10px; color: green;">My Education</h2>
+
+
+    <div style="display: flex; justify-content: space-between;">
+        <h3 style="margin-left: 10px; color: black; font-size:20px;">University of California, Merced</h3>
+        <h3 style="margin-left: 50px; color: black; font-size:20px;">Aug 2021 &#8212 May 2024 (Expected)</h3>
+    </div>
+
+
+</body>
 
 </html>

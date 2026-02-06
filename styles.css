@@ -1,0 +1,87 @@
+:root {
+  --accent: #019b7f;
+  --heading: #0f172a;
+  --text: #334155;
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --border: #dbe5ea;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  letter-spacing: 0.01em;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.02) 0,
+    rgba(15, 23, 42, 0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.08;
+}
+
+.site-nav {
+  position: relative;
+  z-index: 1;
+  padding: 18px 24px;
+  border-bottom: 2px solid var(--accent);
+  background: var(--panel);
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+}
+
+.site-nav a {
+  color: var(--heading);
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(1, 155, 127, 0.45);
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.page-title {
+  margin: 0 0 12px;
+  color: var(--heading);
+}
+
+.page-intro {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.6;
+}

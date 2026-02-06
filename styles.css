@@ -80,8 +80,128 @@ body::before {
   color: var(--heading);
 }
 
+.section-title {
+  margin-top: 40px;
+}
+
 .page-intro {
   margin: 0;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.about-bio {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.about-bio + .about-bio {
+  margin-top: 12px;
+}
+
+.profile-links {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  min-height: 52px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--heading);
+  text-decoration: none;
+  transition: border-color 120ms ease, color 120ms ease, background-color 120ms ease;
+}
+
+.profile-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: #f4fffc;
+}
+
+.profile-link-icon {
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+}
+
+.profile-link-icon-github {
+  width: 140px;
+}
+
+.profile-link-icon-linkedin {
+  width: 130px;
+}
+
+.project-accordion {
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.project-summary {
+  position: relative;
+  list-style: none;
+  cursor: default;
+  padding: 12px 44px 12px 14px;
+  color: var(--heading);
+  font-weight: 600;
+}
+
+.project-summary::-webkit-details-marker {
+  display: none;
+}
+
+.project-summary::after {
+  content: "+";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.project-accordion[open] .project-summary::after {
+  content: "-";
+}
+
+.project-content {
+  padding: 0 14px 12px;
+  border-top: 1px solid var(--border);
+  background: #fcfffe;
+}
+
+.project-summary-link,
+.project-summary-link:visited {
+  color: var(--heading);
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 120ms ease;
+}
+
+.project-summary-link:hover,
+.project-summary-link:focus-visible {
+  color: var(--accent);
+  outline: none;
+}
+
+.project-description {
+  margin: 10px 0 0;
   color: var(--text);
   line-height: 1.6;
 }

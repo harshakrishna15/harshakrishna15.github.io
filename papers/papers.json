@@ -1,0 +1,40 @@
+[
+  {
+    "title": "doScenes: An Autonomous Driving Dataset with Natural Language Instruction for Human Interaction and Vision-Language Navigation",
+    "authors": "Parthib Roy, Srinivasa Perisetla, Shashank Shriram, Harsha Krishnaswamy, Aryan Keskar, Ross Greer.",
+    "submitted": "December 8, 2024",
+    "links": [
+      {
+        "label": "PDF",
+        "url": "https://arxiv.org/pdf/2412.05893v1.pdf"
+      },
+      {
+        "label": "arXiv",
+        "url": "https://arxiv.org/abs/2412.05893"
+      },
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.48550/arXiv.2412.05893"
+      }
+    ]
+  },
+  {
+    "title": "Towards a Multi-Agent Vision-Language System for Zero-Shot Novel Hazardous Object Detection for Autonomous Driving Safety",
+    "authors": "Shashank Shriram, Srinivasa Perisetla, Aryan Keskar, Harsha Krishnaswamy, Tonko Emil Westerhof Bossen, Andreas Mogelmose, Ross Greer.",
+    "submitted": "April 18, 2025",
+    "links": [
+      {
+        "label": "PDF",
+        "url": "https://arxiv.org/pdf/2504.13399v1.pdf"
+      },
+      {
+        "label": "arXiv",
+        "url": "https://arxiv.org/abs/2504.13399"
+      },
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.48550/arXiv.2504.13399"
+      }
+    ]
+  }
+]

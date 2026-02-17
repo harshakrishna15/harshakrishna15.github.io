@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Papers</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <nav class="site-nav">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/projects/">Projects</a></li>
+      <li><a href="/papers/" aria-current="page">Papers</a></li>
+      <li><a href="/short-stories/">Short Stories</a></li>
+    </ul>
+  </nav>
+  <main class="page" id="papers">
+    <h1 class="page-title">Papers</h1>
+    <p class="page-intro">A collection of my research papers and technical writing.</p>
+    <div class="accordion-controls" role="group" aria-label="Paper accordion controls">
+      <button class="accordion-control-btn" type="button" data-accordion-action="toggle-all"><span class="accordion-control-label">Open all</span></button>
+    </div>
+    <div id="papers-list">
+      <p class="page-intro">Loading papers...</p>
+    </div>
+    <noscript>
+      <p class="page-intro">Enable JavaScript to load papers from the data file.</p>
+    </noscript>
+  </main>
+  <script src="/assets/js/accordions.js"></script>
+  <script>
+    (() => {
+      const papersList = document.getElementById("papers-list");
+      const toggleButton = document.querySelector('[data-accordion-action="toggle-all"]');
+      if (!papersList || !window.AccordionUtils) {
+        return;
+      }
+
+      let accordionGroup = null;
+
+      const mountAccordionGroup = () => {
+        if (accordionGroup && accordionGroup.destroy) {
+          accordionGroup.destroy();
+        }
+
+        const accordions = [...papersList.querySelectorAll(".project-accordion")];
+        accordionGroup = window.AccordionUtils.initGroup({ accordions, toggleButton });
+      };
+
+      const createDescription = (text) => {
+        if (!text) {
+          return null;
+        }
+
+        const paragraph = document.createElement("p");
+        paragraph.className = "project-description";
+        paragraph.textContent = text;
+        return paragraph;
+      };
+
+      const createLinks = (links) => {
+        if (!Array.isArray(links) || links.length === 0) {
+          return null;
+        }
+
+        const validLinks = links.filter((link) => link && link.label && link.url);
+        if (validLinks.length === 0) {
+          return null;
+        }
+
+        const row = document.createElement("p");
+        row.className = "paper-links";
+
+        validLinks.forEach((link, index) => {
+          const anchor = document.createElement("a");
+          anchor.className = "project-summary-link";
+          anchor.href = link.url;
+          anchor.target = "_blank";
+          anchor.rel = "noreferrer";
+          anchor.textContent = link.label;
+          row.append(anchor);
+
+          if (index < validLinks.length - 1) {
+            const sep = document.createElement("span");
+            sep.className = "paper-links-sep";
+            sep.textContent = "|";
+            row.append(sep);
+          }
+        });
+
+        return row;
+      };
+
+      const createPaperAccordion = (paper) => {
+        const details = document.createElement("details");
+        details.className = "project-accordion";
+
+        const summary = document.createElement("summary");
+        summary.className = "project-summary";
+        summary.textContent = paper.title || "Untitled Paper";
+
+        const content = document.createElement("div");
+        content.className = "project-content";
+
+        const inner = document.createElement("div");
+        inner.className = "project-content-inner";
+
+        const authors = createDescription(paper.authors);
+        if (authors) {
+          inner.append(authors);
+        }
+
+        const venue = createDescription(paper.venue ? `Venue: ${paper.venue}` : "");
+        if (venue) {
+          inner.append(venue);
+        }
+
+        const submitted = createDescription(paper.submitted ? `Submitted: ${paper.submitted}` : "");
+        if (submitted) {
+          inner.append(submitted);
+        }
+
+        const abstract = createDescription(paper.abstract);
+        if (abstract) {
+          inner.append(abstract);
+        }
+
+        const links = createLinks(paper.links);
+        if (links) {
+          inner.append(links);
+        }
+
+        content.append(inner);
+        details.append(summary, content);
+        return details;
+      };
+
+      const renderPapers = (papers) => {
+        papersList.innerHTML = "";
+
+        if (!Array.isArray(papers) || papers.length === 0) {
+          const empty = document.createElement("p");
+          empty.className = "page-intro";
+          empty.textContent = "No papers added yet.";
+          papersList.append(empty);
+          mountAccordionGroup();
+          return;
+        }
+
+        const fragment = document.createDocumentFragment();
+        papers.forEach((paper) => {
+          const accordion = createPaperAccordion(paper);
+          fragment.append(accordion);
+        });
+
+        papersList.append(fragment);
+        mountAccordionGroup();
+      };
+
+      const loadPapers = async () => {
+        try {
+          const response = await fetch("./papers.json", { cache: "no-store" });
+          if (!response.ok) {
+            throw new Error("Failed to load papers");
+          }
+
+          const papers = await response.json();
+          renderPapers(papers);
+        } catch (error) {
+          papersList.innerHTML = "";
+          const message = document.createElement("p");
+          message.className = "page-intro";
+          message.textContent = "Could not load papers right now.";
+          papersList.append(message);
+          mountAccordionGroup();
+        }
+      };
+      loadPapers();
+    })();
+  </script>
+</body>
+</html>

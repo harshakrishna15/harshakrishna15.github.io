@@ -145,6 +145,49 @@ body {
   width: 130px;
 }
 
+.accordion-controls {
+  margin: 12px auto 6px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.accordion-control-btn {
+  padding: 6px 10px;
+  min-width: 120px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--heading);
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: border-color 140ms ease, color 140ms ease;
+}
+
+.accordion-control-label {
+  display: inline-block;
+  transition: opacity 130ms ease, transform 180ms ease;
+}
+
+.accordion-control-btn.is-label-changing .accordion-control-label {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+.accordion-control-btn:hover,
+.accordion-control-btn:focus-visible {
+  border-color: #a4b5c8;
+  color: var(--accent);
+  outline: none;
+}
+
+.accordion-control-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .project-accordion {
   margin-top: 8px;
   margin-left: auto;
@@ -236,6 +279,15 @@ body {
 
 .project-description {
   margin: 10px 0 0;
+}
+
+.paper-links {
+  margin: 12px 0 0;
+}
+
+.paper-links-sep {
+  color: var(--muted);
+  margin: 0 6px;
 }
 
 @media (max-width: 700px) {

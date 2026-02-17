@@ -76,13 +76,18 @@ body {
 }
 
 .section-title {
-  margin-top: 34px;
+  margin-top: 26px;
+  margin-bottom: 8px;
   color: var(--muted);
   font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
   font-size: 0.82rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-align: center;
+}
+
+.page-intro + .section-title {
+  margin-top: 14px;
 }
 
 .page-intro {
@@ -146,11 +151,15 @@ body {
 }
 
 .accordion-controls {
-  margin: 12px auto 6px;
+  margin: 8px auto;
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.page-intro + .accordion-controls {
+  margin-top: 10px;
 }
 
 .accordion-control-btn {
@@ -207,6 +216,7 @@ body {
   color: var(--heading);
   font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
   font-weight: 600;
+  line-height: 1.5;
 }
 
 .project-summary::-webkit-details-marker {

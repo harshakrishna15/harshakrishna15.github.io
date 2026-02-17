@@ -1,130 +1,131 @@
 :root {
-  --accent: #019b7f;
-  --heading: #0f172a;
-  --text: #334155;
-  --bg: #f8fafc;
+  --bg: #f7f8fa;
   --panel: #ffffff;
-  --border: #dbe5ea;
+  --text: #334155;
+  --heading: #0f172a;
+  --muted: #64748b;
+  --accent: #0f766e;
+  --border: #dbe2ea;
 }
 
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  letter-spacing: 0.01em;
+html {
+  scroll-behavior: smooth;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(15, 23, 42, 0.02) 0,
-    rgba(15, 23, 42, 0.02) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  opacity: 0.08;
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+  line-height: 1.6;
 }
 
 .site-nav {
-  position: relative;
-  z-index: 1;
-  padding: 18px 24px;
-  border-bottom: 2px solid var(--accent);
+  border-bottom: 1px solid var(--border);
   background: var(--panel);
-  box-shadow: 0 0 0 1px var(--border);
 }
 
 .site-nav ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
+  padding: 14px 20px;
+  max-width: 760px;
   display: flex;
+  gap: 22px;
+  align-items: center;
   justify-content: center;
-  gap: 28px;
 }
 
 .site-nav a {
   color: var(--heading);
   text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9rem;
   font-weight: 600;
-  white-space: nowrap;
+  transition: color 140ms ease;
 }
 
 .site-nav a:hover,
+.site-nav a:focus-visible,
 .site-nav a[aria-current="page"] {
   color: var(--accent);
-  text-shadow: 0 0 10px rgba(1, 155, 127, 0.45);
+  outline: none;
 }
 
 .page {
-  position: relative;
-  z-index: 1;
-  max-width: 720px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 48px 24px;
+  padding: 44px 20px 56px;
+  text-align: left;
 }
 
 .page-title {
   margin: 0 0 12px;
   color: var(--heading);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.page > .page-title:first-child {
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
 }
 
 .section-title {
-  margin-top: 40px;
+  margin-top: 34px;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .page-intro {
   margin: 0;
-  color: var(--text);
-  line-height: 1.6;
+  max-width: 65ch;
+  font-size: 1.05rem;
+  line-height: 1.72;
 }
 
-.about-bio {
-  font-size: 1.1rem;
-  line-height: 1.8;
-}
-
-.about-bio + .about-bio {
+.page-intro + .page-intro {
   margin-top: 12px;
 }
 
+.about-bio {
+  color: var(--text);
+}
+
 .profile-links {
-  margin-top: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  margin: 12px auto 0;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  max-width: 560px;
 }
 
 .profile-link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  width: fit-content;
-  min-height: 52px;
+  justify-content: center;
+  min-height: 58px;
   padding: 10px 14px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--panel);
-  color: var(--heading);
   text-decoration: none;
-  transition: border-color 120ms ease, color 120ms ease, background-color 120ms ease;
+  transition: border-color 140ms ease, transform 140ms ease;
 }
 
-.profile-link:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-  background: #f4fffc;
+.profile-link:hover,
+.profile-link:focus-visible {
+  border-color: #a4b5c8;
+  transform: translateY(-1px);
+  outline: none;
 }
 
 .profile-link-icon {
@@ -137,7 +138,7 @@ body::before {
 }
 
 .profile-link-icon-github {
-  width: 140px;
+  width: 142px;
 }
 
 .profile-link-icon-linkedin {
@@ -146,18 +147,22 @@ body::before {
 
 .project-accordion {
   margin-top: 8px;
+  margin-left: auto;
+  margin-right: auto;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--panel);
   overflow: hidden;
+  text-align: left;
 }
 
 .project-summary {
   position: relative;
   list-style: none;
-  cursor: default;
-  padding: 12px 44px 12px 14px;
+  cursor: pointer;
+  padding: 13px 46px 13px 14px;
   color: var(--heading);
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
   font-weight: 600;
 }
 
@@ -170,28 +175,57 @@ body::before {
   position: absolute;
   right: 14px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) rotate(0deg);
+  transform-origin: center;
   color: var(--accent);
-  font-weight: 600;
+  font-weight: 700;
+  transition: transform 180ms ease;
 }
 
 .project-accordion[open] .project-summary::after {
-  content: "-";
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.project-accordion.is-animated .project-summary::after {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.project-accordion.is-animated.is-expanded .project-summary::after {
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .project-content {
-  padding: 0 14px 12px;
   border-top: 1px solid var(--border);
-  background: #fcfffe;
+  background: var(--panel);
+}
+
+.project-content-inner {
+  display: flow-root;
+  padding: 0 14px 12px;
+}
+
+.project-accordion.is-animated .project-content {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  border-top-color: transparent;
+  transition:
+    height 340ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 240ms ease,
+    border-top-color 200ms ease;
+  will-change: height;
+}
+
+.project-accordion.is-animated.is-expanded .project-content {
+  opacity: 1;
+  border-top-color: var(--border);
 }
 
 .project-summary-link,
 .project-summary-link:visited {
-  color: var(--heading);
+  color: inherit;
   text-decoration: none;
   font-weight: 600;
-  cursor: pointer;
-  transition: color 120ms ease;
 }
 
 .project-summary-link:hover,
@@ -202,6 +236,34 @@ body::before {
 
 .project-description {
   margin: 10px 0 0;
-  color: var(--text);
-  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .site-nav ul {
+    gap: 14px;
+    flex-wrap: wrap;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .site-nav a {
+    font-size: 0.82rem;
+  }
+
+  .page {
+    padding-top: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0ms !important;
+  }
 }

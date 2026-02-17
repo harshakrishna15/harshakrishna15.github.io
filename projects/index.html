@@ -7,14 +7,13 @@
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <nav class="site-nav">
     <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="/about/">About</a></li>
       <li><a href="/projects/" aria-current="page">Projects</a></li>
       <li><a href="/short-stories/">Short Stories</a></li>
     </ul>
@@ -27,13 +26,115 @@
     <details class="project-accordion">
       <summary class="project-summary"><a class="project-summary-link" href="https://github.com/harshakrishna15/yt-dlp-gui" target="_blank" rel="noreferrer">yt-dlp-gui</a></summary>
       <div class="project-content">
-        <p class="project-description">A clean and simple GUI built with tkinter to use yt-dlp.</p>
+        <div class="project-content-inner">
+          <p class="project-description">A clean and simple GUI built with tkinter to use yt-dlp.</p>
+        </div>
       </div>
     </details>
 
     <h2 class="page-title section-title" id="games">Games</h2>
-    <p class="page-intro">Projects coming soon.</p>
-
+    <p class="page-intro">Games coming soon.</p>
   </main>
+  <script>
+    (() => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
+
+      const accordions = document.querySelectorAll(".project-accordion");
+
+      accordions.forEach((accordion) => {
+        const summary = accordion.querySelector(".project-summary");
+        const content = accordion.querySelector(".project-content");
+        let isClosing = false;
+        let isExpanding = false;
+
+        if (!summary || !content) {
+          return;
+        }
+
+        accordion.classList.add("is-animated");
+
+        const clearInlineContentStyles = () => {
+          content.style.height = "";
+          content.style.opacity = "";
+          content.style.overflow = "";
+        };
+
+        const expand = () => {
+          const startHeight = isClosing ? content.offsetHeight : 0;
+
+          isClosing = false;
+          isExpanding = true;
+
+          accordion.open = true;
+          accordion.classList.add("is-expanded");
+          content.style.overflow = "hidden";
+          content.style.height = `${startHeight}px`;
+          content.style.opacity = "0";
+          void content.offsetHeight;
+          content.style.height = `${content.scrollHeight}px`;
+          content.style.opacity = "1";
+        };
+
+        const shrink = () => {
+          const startHeight = content.offsetHeight || content.scrollHeight;
+
+          isExpanding = false;
+          isClosing = true;
+          content.style.overflow = "hidden";
+          content.style.height = `${startHeight}px`;
+          content.style.opacity = "1";
+          accordion.classList.remove("is-expanded");
+          void content.offsetHeight;
+          content.style.height = "0px";
+          content.style.opacity = "0";
+        };
+
+        summary.addEventListener("click", (event) => {
+          if (event.target.closest(".project-summary-link")) {
+            return;
+          }
+
+          event.preventDefault();
+
+          if (isClosing || !accordion.classList.contains("is-expanded")) {
+            expand();
+            return;
+          }
+
+          if (isExpanding || accordion.classList.contains("is-expanded")) {
+            shrink();
+          }
+        });
+
+        content.addEventListener("transitionend", (event) => {
+          if (event.propertyName !== "height" || event.target !== content) {
+            return;
+          }
+
+          if (isClosing) {
+            isClosing = false;
+            accordion.open = false;
+            clearInlineContentStyles();
+            return;
+          }
+
+          if (isExpanding) {
+            isExpanding = false;
+            content.style.height = `${content.scrollHeight}px`;
+            content.style.overflow = "";
+            content.style.opacity = "";
+          }
+        });
+
+        if (accordion.open) {
+          accordion.classList.add("is-expanded");
+          content.style.height = `${content.scrollHeight}px`;
+          content.style.opacity = "1";
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

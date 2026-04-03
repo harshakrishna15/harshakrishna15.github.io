@@ -52,14 +52,19 @@
         accordionGroup = window.AccordionUtils.initGroup({ accordions, toggleButton });
       };
 
-      const createDescription = (text) => {
+      const createDescription = (text, options = {}) => {
         if (!text) {
           return null;
         }
 
+        const { allowHtml = false } = options;
         const paragraph = document.createElement("p");
         paragraph.className = "project-description";
-        paragraph.textContent = text;
+        if (allowHtml) {
+          paragraph.innerHTML = text;
+        } else {
+          paragraph.textContent = text;
+        }
         return paragraph;
       };
 
@@ -110,7 +115,7 @@
         const inner = document.createElement("div");
         inner.className = "project-content-inner";
 
-        const authors = createDescription(paper.authors);
+        const authors = createDescription(paper.authors, { allowHtml: true });
         if (authors) {
           inner.append(authors);
         }

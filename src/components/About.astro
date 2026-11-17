@@ -13,11 +13,23 @@ import { site } from '../data/site';
       <li><a href={site.linkedIn} target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>
       <li><a href={site.github} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
       <li>
-        <details class="email-disclosure">
-          <summary>Show email</summary>
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-        </details>
+        <button type="button" class="email-button" aria-controls="email-address" data-email-reveal hidden>Show email</button>
+        <a id="email-address" class="email-address" href={`mailto:${site.email}`} hidden>{site.email}</a>
       </li>
     </ul>
   </section>
 </section>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-email-reveal]');
+  const address = document.querySelector<HTMLAnchorElement>('#email-address');
+
+  if (button && address) {
+    button.hidden = false;
+    button.addEventListener('click', () => {
+      address.hidden = false;
+      button.hidden = true;
+      address.focus({ preventScroll: true });
+    }, { once: true });
+  }
+</script>

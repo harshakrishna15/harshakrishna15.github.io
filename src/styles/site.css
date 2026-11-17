@@ -1,18 +1,18 @@
 :root {
   color-scheme: light;
-  --paper: #f4f4f3;
-  --ink: #1d1e1f;
-  --muted: #4d4e50;
+  --paper: #f5f5f5;
+  --ink: #171717;
+  --muted: #4a4a4a;
   --rule: #b7b7b7;
-  --pale: rgb(255 255 255 / 53%);
+  --pale: rgb(255 255 255 / 34%);
   --screen: rgb(210 210 210 / 32%);
-  --gutter: 0.68rem;
+  --gutter: 0.56rem;
   --ease-out: cubic-bezier(0.2, 0.7, 0.25, 1);
   --heading-font: "Barlow Semi Condensed", "Arial Narrow", sans-serif;
   --body-font: "Source Sans 3", system-ui, sans-serif;
   font: 17px / 1.5 var(--body-font);
   color: var(--ink);
-  background: var(--paper) url("/assets/paper-grain.png") repeat;
+  background: var(--paper) url("../assets/paper-grain.png") repeat;
 }
 
 *, *::before, *::after {
@@ -85,34 +85,61 @@ button {
 
 .panel {
   min-width: 0;
-  border: 1px solid var(--ink);
+  border: 2px solid var(--ink);
   background: var(--pale);
 }
 
-.intro-panel {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  min-height: clamp(14rem, 29vw, 21rem);
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(1.25rem, 5.5vw, 3.5rem);
-  border-width: 2px;
+.opening-grid {
+  --slant: clamp(1.5rem, 4vw, 3.1rem);
+  display: grid;
+  grid-template-columns: minmax(0, 3.4fr) minmax(0, 1fr);
+  gap: var(--gutter);
 }
 
-.intro-panel::before {
+.intro-panel, .screentone-panel {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  background: var(--ink);
+}
+
+.intro-panel {
+  display: flex;
+  min-height: clamp(15rem, 29vw, 20rem);
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.25rem, 4.1vw, 3rem);
+  padding-inline-end: calc(clamp(1.25rem, 3.1vw, 2.4rem) + var(--slant));
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--slant)) 100%, 0 100%);
+}
+
+.screentone-panel {
+  margin-inline-start: calc(-1 * var(--slant));
+  clip-path: polygon(var(--slant) 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.intro-panel::before, .screentone-panel::before {
   position: absolute;
   z-index: -1;
-  inset: 0 0 0 auto;
-  width: min(34%, 16rem);
-  background: radial-gradient(circle, #414141 0.95px, transparent 1.25px) 0 0 / 5.5px 5.5px;
-  mask-image: linear-gradient(225deg, rgb(0 0 0 / 60%) 0%, transparent 65%);
+  inset: 2px;
+  clip-path: inherit;
+  background: var(--paper) url("../assets/paper-grain.png") repeat;
+  content: "";
+}
+
+.screentone-panel::after {
+  position: absolute;
+  z-index: -1;
+  inset: 2px;
+  clip-path: inherit;
+  background: radial-gradient(circle, #242424 1.15px, transparent 1.48px) 0 0 / 5.2px 5.2px;
+  mask-image: linear-gradient(150deg, transparent 8%, rgb(0 0 0 / 39%) 40%, #000 93%);
   pointer-events: none;
   content: "";
 }
 
 .intro-panel h1 {
-  font-size: clamp(3rem, 7vw, 5.15rem);
+  font-size: clamp(3rem, 6.1vw, 4.65rem);
   letter-spacing: -0.025em;
   text-wrap: balance;
 }
@@ -173,14 +200,23 @@ button {
   justify-content: space-between;
 }
 
-.email-disclosure summary {
+.email-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
   cursor: pointer;
 }
 
-.email-disclosure a {
-  display: inline-block;
-  max-width: 100%;
-  margin-top: 0.4rem;
+.email-button:hover {
+  color: var(--muted);
+}
+
+.contact-links .email-address {
+  display: block;
   overflow-wrap: anywhere;
 }
 
@@ -189,8 +225,8 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 0.65rem;
-  margin-block: 1.4rem var(--gutter);
-  border-bottom: 1px solid var(--ink);
+  margin-block: 0.86rem var(--gutter);
+  border-bottom: 2px solid var(--ink);
 }
 
 .section-heading h2 {
@@ -323,8 +359,16 @@ button {
     width: calc(100% - 1.75rem);
   }
 
-  .about-grid, .projects-grid {
+  .opening-grid, .about-grid, .projects-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .opening-grid {
+    --slant: 0px;
+  }
+
+  .screentone-panel {
+    min-height: 2.65rem;
   }
 
   .intro-panel h1 {
@@ -338,7 +382,7 @@ button {
     scroll-behavior: smooth;
   }
 
-  a, .outline-button, .paper summary {
+  a, .outline-button, .email-button, .paper summary {
     transition: color 155ms ease, background-color 190ms ease;
   }
 
@@ -347,18 +391,18 @@ button {
   }
 
   @supports selector(details::details-content) and (interpolate-size: allow-keywords) {
-    .paper, .email-disclosure {
+    .paper {
       interpolate-size: allow-keywords;
     }
 
-    .paper::details-content, .email-disclosure::details-content {
+    .paper::details-content {
       block-size: 0;
       overflow: clip;
       opacity: 0;
       transition: block-size 250ms var(--ease-out), opacity 180ms ease, content-visibility 250ms allow-discrete;
     }
 
-    .paper[open]::details-content, .email-disclosure[open]::details-content {
+    .paper[open]::details-content {
       block-size: auto;
       opacity: 1;
     }

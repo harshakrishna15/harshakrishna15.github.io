@@ -10,12 +10,6 @@ interface Props {
 }
 
 const { description } = Astro.props;
-const nav = [
-  { label: 'Home', href: '#home' },
-  { label: 'About me', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Papers', href: '#papers' },
-];
 ---
 
 <!doctype html>
@@ -29,20 +23,6 @@ const nav = [
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="masthead">
-      <div class="wrap masthead-inner">
-        <a class="wordmark" href="#home">{site.name}</a>
-        <nav aria-label="Main navigation">
-          <ul class="nav-links">
-            {nav.map(({ label, href }) => (
-              <li>
-                <a href={href}>{label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-    </header>
     <main class="wrap page" id="main" tabindex="-1">
       <slot />
     </main>

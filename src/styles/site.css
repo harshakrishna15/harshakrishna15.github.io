@@ -69,48 +69,6 @@ button {
   margin-inline: auto;
 }
 
-.masthead {
-  position: sticky;
-  z-index: 2;
-  top: 0;
-  background: var(--paper) url("/assets/paper-grain.png");
-}
-
-.masthead-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.65rem 1.6rem;
-  min-height: 4.2rem;
-  border-bottom: 1px solid var(--ink);
-}
-
-.wordmark {
-  font: 700 1.24rem / 1.1 var(--heading-font);
-  text-decoration: none;
-}
-
-.nav-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.25rem 1.25rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.nav-links a {
-  display: block;
-  padding-block: 0.18rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.nav-links a:hover, .nav-links a:focus-visible {
-  text-decoration: underline;
-}
-
 .page {
   display: grid;
   gap: var(--gutter);
@@ -122,7 +80,7 @@ button {
 }
 
 .page [id] {
-  scroll-margin-block-start: 6.1rem;
+  scroll-margin-block-start: 1rem;
 }
 
 .panel {
@@ -363,20 +321,6 @@ button {
 @media (max-width: 43rem) {
   .wrap {
     width: calc(100% - 1.75rem);
-  }
-
-  .masthead-inner {
-    flex-wrap: wrap;
-    padding-block: 0.65rem 0.45rem;
-    min-height: auto;
-  }
-
-  .nav-links {
-    gap: 0.15rem 0.8rem;
-  }
-
-  .page [id] {
-    scroll-margin-block-start: 6.5rem;
   }
 
   .about-grid, .projects-grid {

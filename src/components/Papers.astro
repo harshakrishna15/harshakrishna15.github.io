@@ -1,0 +1,70 @@
+---
+import { papers } from '../data/papers';
+---
+
+<section id="papers" aria-labelledby="papers-heading">
+  <header class="section-heading">
+    <h2 id="papers-heading">Papers</h2>
+    <button type="button" class="outline-button" data-toggle-papers hidden>Open all</button>
+  </header>
+  <div class="entry-stack">
+    {papers.map(({ id, title, authors, venue, submitted, abstract, links }) => (
+      <details id={id} class="panel paper" data-paper>
+        <summary>
+          <span>{title}</span>
+          <span class="disclosure-mark" aria-hidden="true"></span>
+        </summary>
+        <div class="paper-body">
+          {authors && <p set:html={authors} />}
+          {venue && <p>Venue: {venue}</p>}
+          {submitted && <p class="muted">Submitted {submitted}</p>}
+          {abstract && <p>{abstract}</p>}
+          {links && (
+            <ul class="paper-links">
+              {links.map(({ label, url }) => (
+                <li><a class="text-link" href={url} target="_blank" rel="noreferrer">{label} <span aria-hidden="true">↗</span></a></li>
+              ))}
+            </ul>
+          )}
+          <a class="paper-permalink" href={`#${id}`} aria-label={`Link to ${title}`}>Link to this paper</a>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<script>
+  const papers = [...document.querySelectorAll<HTMLDetailsElement>('[data-paper]')];
+  const toggle = document.querySelector<HTMLButtonElement>('[data-toggle-papers]');
+
+  function openLinkedPaper() {
+    const id = location.hash.slice(1);
+    const paper = papers.find((entry) => entry.id === id);
+    if (paper) {
+      paper.open = true;
+      paper.scrollIntoView({ block: 'start' });
+    }
+  }
+
+  openLinkedPaper();
+  window.addEventListener('hashchange', openLinkedPaper);
+
+  if (toggle && papers.length > 0) {
+    const updateLabel = () => {
+      toggle.textContent = papers.every((paper) => paper.open) ? 'Close all' : 'Open all';
+    };
+
+    toggle.hidden = false;
+    toggle.addEventListener('click', () => {
+      const open = papers.some((paper) => !paper.open);
+      for (const paper of papers) {
+        paper.open = open;
+      }
+      updateLabel();
+    });
+    for (const paper of papers) {
+      paper.addEventListener('toggle', updateLabel);
+    }
+    updateLabel();
+  }
+</script>

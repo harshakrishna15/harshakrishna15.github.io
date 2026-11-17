@@ -1,0 +1,23 @@
+---
+import { site } from '../data/site';
+---
+
+<section id="about" class="about-grid" aria-labelledby="about-heading">
+  <div class="panel profile-panel">
+    <h2 id="about-heading">About me</h2>
+    <p>I’m interested in systems, cybersecurity, computer vision, and machine learning. My research has included autonomous driving datasets and vision-language methods for detecting road hazards.</p>
+  </div>
+  <section class="panel contact-panel">
+    <h2>Contact</h2>
+    <ul class="contact-links">
+      <li><a href={site.linkedIn} target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>
+      <li><a href={site.github} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
+      <li>
+        <details class="email-disclosure">
+          <summary>Show email</summary>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </details>
+      </li>
+    </ul>
+  </section>
+</section>

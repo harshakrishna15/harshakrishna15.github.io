@@ -1,0 +1,30 @@
+---
+import { site } from '../data/site';
+
+export function getStaticPaths() {
+  return [
+    { params: { legacy: 'about' }, props: { label: 'About me' } },
+    { params: { legacy: 'projects' }, props: { label: 'Projects' } },
+    { params: { legacy: 'papers' }, props: { label: 'Papers' } },
+  ];
+}
+
+const { label } = Astro.props;
+const fallback = `/#${Astro.params.legacy}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{label} · {site.name}</title>
+    <script define:vars={{ fallback }}>
+      location.replace(location.hash ? `/${location.hash}` : fallback);
+    </script>
+    <noscript><meta http-equiv="refresh" content={`0;url=${fallback}`} /></noscript>
+  </head>
+  <body>
+    <a href={fallback}>Go to {label}</a>
+  </body>
+</html>

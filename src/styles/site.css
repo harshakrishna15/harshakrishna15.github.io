@@ -161,6 +161,10 @@ button {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
 }
 
+.projects-grid > :last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
 .profile-panel, .contact-panel, .project-entry {
   padding: clamp(1.05rem, 3vw, 1.85rem);
 }
